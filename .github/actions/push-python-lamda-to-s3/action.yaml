@@ -16,7 +16,7 @@ inputs:
     default: '3.13'
   poetry_version:
     description: 'Poetry version to use'
-    default: '1.8.3'
+    default: '1.8.4'
   aws_ecr_role_arn:
     description: "AWS S3 role"
     required: true
