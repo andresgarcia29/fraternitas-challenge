@@ -30,7 +30,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - id: push-python-lamda-to-s3
-        uses: workramp/gha-common-workflows/actions/push-python-lamda-to-s3@main
+        uses: ./.github/actions/push-python-lamda-to-s3
         with:
           s3_bucket: ${{ env.S3_BUCKET }}
           name: ${{ env.NAME }}
