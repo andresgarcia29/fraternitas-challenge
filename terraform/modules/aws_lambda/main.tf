@@ -60,7 +60,7 @@ resource "aws_lambda_function" "lambda" {
 
   s3_bucket        = var.s3.enabled ? var.s3.bucket_name : null
   s3_key           = var.s3.enabled ? var.s3.key : null
-  source_code_hash = var.s3.enabled ? filebase64sha256(var.s3.key) : null
+  source_code_hash = var.s3.enabled ? var.s3.key : null
 
   filename = var.file.enabled && !var.s3.enabled ? var.file.output_path : null
   environment {
