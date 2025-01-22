@@ -32,9 +32,6 @@ runs:
       with:
         role-to-assume: ${{ inputs.aws_ecr_role_arn }}
         aws-region: ${{ inputs.aws_region }}
-    - name: Go to the folder
-      shell: bash
-      run: cd ./api
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -45,11 +42,13 @@ runs:
         pip install poetry==${{ inputs.poetry_version }}
     - name: Install dependencies
       shell: bash
+      working-directory: ./api
       run: |
         poetry config --local virtualenvs.in-project true
         poetry install --only main --sync
     - name: Build Lambda package
       shell: bash
+      working-directory: ./api
       run: |
         mkdir -p /tmp/lambda-package
         cp --recursive .venv/lib/python*/site-packages/* /tmp/lambda-package/
