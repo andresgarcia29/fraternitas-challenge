@@ -35,6 +35,7 @@ jobs:
           s3_bucket: ${{ env.S3_BUCKET }}
           name: ${{ env.NAME }}
           version: ${{ github.sha }}
+          aws_region: ${{ env.AWS_REGION }}
 
   run-terraform-apply:
     runs-on: ubuntu-latest
