@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "api"
+name = "fraternitas-challenge"
 version = "0.1.0"
 description = "API"
 authors = ["Andres Garcia <jose.andres.gm29@gmail.com>"]
