@@ -32,6 +32,8 @@ runs:
       with:
         role-to-assume: ${{ inputs.aws_ecr_role_arn }}
         aws-region: ${{ inputs.aws_region }}
+    - name: Go to the folder
+      run: cd ./api
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
