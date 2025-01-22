@@ -38,7 +38,7 @@ jobs:
 
   run-terraform-apply:
     runs-on: ubuntu-latest
-    depends-on: push-python-lamda-to-s3
+    needs: push-python-lamda-to-s3
 
     steps:
       - uses: actions/checkout@v4
