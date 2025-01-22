@@ -1,0 +1,49 @@
+name: Deploy Python Lambda to S3
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  S3_BUCKET: fraternitas-prod-microservice
+  NAME: fraternitas-prod-microservice
+
+jobs:
+  push-python-lamda-to-s3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: push-python-lamda-to-s3
+        uses: workramp/gha-common-workflows/actions/push-python-lamda-to-s3@main
+        with:
+          s3_bucket: ${{ env.S3_BUCKET }}
+          name: ${{ env.NAME }}
+          version: ${{ github.sha }}
+
+  run-terraform-apply:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        working-directory: terraform/phases/prod
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: terraform/phases/prod
+        run: terraform validate
+
+      - name: Terraform Apply
+        working-directory: terraform/phases/prod
+        run: terraform apply -var version=${{ github.sha }} -auto-approve
