@@ -38,6 +38,7 @@ jobs:
 
   run-terraform-apply:
     runs-on: ubuntu-latest
+    depends-on: push-python-lamda-to-s3
 
     steps:
       - uses: actions/checkout@v4
@@ -61,4 +62,4 @@ jobs:
 
       - name: Terraform Apply
         working-directory: terraform/phases/prod
-        run: terraform apply -var version=${{ github.sha }} -auto-approve
+        run: terraform apply -var app_version=${{ github.sha }} -auto-approve
